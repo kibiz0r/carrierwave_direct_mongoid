@@ -3,6 +3,7 @@
 require 'mongoid'
 require 'carrierwave/mongoid'
 require 'carrierwave_direct'
+require 'carrierwave_direct/mount'
 require 'carrierwave_direct/validations/active_model'
 
 module CarrierWave
