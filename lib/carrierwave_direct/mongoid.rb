@@ -1,14 +1,21 @@
 # encoding: utf-8
 
-require 'active_record'
+require 'mongoid'
+require 'carrierwave/mongoid'
 require 'carrierwave_direct/validations/active_model'
 
+module CarrierWave
+  module Mongoid
+    alias_method :mongoid_mount_uploader, :mount_uploader
+  end
+end
+
 module CarrierWaveDirect
-  module ActiveRecord
+  module Mongoid
     include CarrierWaveDirect::Mount
 
     def mount_uploader(column, uploader=nil, options={}, &block)
-      super
+      mongoid_mount_uploader column, uploader, options, &block
 
       uploader.instance_eval <<-RUBY, __FILE__, __LINE__+1
         include ActiveModel::Conversion
@@ -51,5 +58,4 @@ module CarrierWaveDirect
   end
 end
 
-ActiveRecord::Base.extend CarrierWaveDirect::ActiveRecord
-
+Mongoid::Document::ClassMethods.send :include, CarrierWaveDirect::Mongoid
