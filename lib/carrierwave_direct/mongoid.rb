@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'mongoid'
+require 'carrierwave'
 require 'carrierwave/mongoid'
 require 'carrierwave_direct'
 require 'carrierwave_direct/mount'

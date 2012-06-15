@@ -14,10 +14,4 @@ describe CarrierWaveDirect::Mongoid do
       MyDocument.new(:key => "some key").key.should == "some key"
     end
   end
-
-  describe "Uploader#model_name" do
-    it "should work" do
-      MyDocument.new.video.model_name.should == "DirectUploader"
-    end
-  end
 end
