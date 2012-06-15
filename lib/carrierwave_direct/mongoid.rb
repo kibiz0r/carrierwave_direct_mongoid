@@ -6,18 +6,12 @@ require 'carrierwave_direct'
 require 'carrierwave_direct/mount'
 require 'carrierwave_direct/validations/active_model'
 
-module CarrierWave
-  module Mongoid
-    alias_method :mongoid_mount_uploader, :mount_uploader
-  end
-end
-
 module CarrierWaveDirect
   module Mongoid
     include CarrierWaveDirect::Mount
 
     def mount_uploader(column, uploader=nil, options={}, &block)
-      mongoid_mount_uploader column, uploader, options, &block
+      super
 
       uploader.instance_eval <<-RUBY, __FILE__, __LINE__+1
         include ActiveModel::Conversion
